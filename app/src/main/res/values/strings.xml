@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TopStackOverflowUsers</string>
+    <string name="no_internet_connection_detected">No internet connection detected</string>
+    <string name="server_error_detected">Server error</string>
+    <string name="identifier">Id: %1$s</string>
+    <string name="reputation">Reputation: %1$s</string>
+    <string name="location">Location: %1$s</string>
+    <string name="creation_date">Creation Date: %1$s</string>
+</resources>

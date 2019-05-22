@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">350dp</dimen>
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="no_connection_size">100dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="avatar_size">100dp</dimen>
+    <dimen name="avatar_margin">8dp</dimen>
+    <dimen name="name_margin">8dp</dimen>
+    <dimen name="reputation_margin">8dp</dimen>
+    <dimen name="name_size">20sp</dimen>
+    <dimen name="details_padding">16dp</dimen>
+</resources>

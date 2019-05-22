@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="state"
+            type="com.slesarew.topstackoverflowusers.userlist.viewmodel.state.ViewState"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:hasConnection="@{state.hasConnection}"
+        app:hasError="@{state.hasError}"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/error_icon"
+            android:layout_width="@dimen/no_connection_size"
+            android:layout_height="@dimen/no_connection_size"
+            android:layout_gravity="center_horizontal"
+            android:tint="@color/colorPrimary"
+            app:hasConnection="@{state.hasConnection}"
+            app:hasError="@{state.hasError}"
+            app:srcCompat="@drawable/ic_no_connection_24dp"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:hasConnection="@{state.hasConnection}"
+            app:hasError="@{state.hasError}"/>
+
+    </LinearLayout>
+
+</layout>

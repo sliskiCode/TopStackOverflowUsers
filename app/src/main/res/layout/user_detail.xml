@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UserPresentationModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/details_padding"
+            android:contentDescription="@null"
+            app:loadFromUrl="@{user.image}"/>
+
+        <TextView
+            android:id="@+id/identifier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/details_padding"
+            android:text="@{String.valueOf(user.id)}"
+            tools:text="Id: 1"/>
+
+        <TextView
+            android:id="@+id/reputation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/details_padding"
+            android:text="@{user.reputation}"
+            tools:text="Reputation: 120304958"/>
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/details_padding"
+            android:text="@{user.location}"
+            tools:text="Location: London"/>
+
+        <TextView
+            android:id="@+id/creation_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/details_padding"
+            app:formattedDate="@{user.creationDate}"
+            tools:text="Creation date: 12-12-2012"/>
+
+    </LinearLayout>
+
+</layout>
