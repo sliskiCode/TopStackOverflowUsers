@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.slesarew.topstackoverflowusers.userlist.model.connection.NetworkState.AVAILABLE
 import com.slesarew.topstackoverflowusers.userlist.model.connection.NetworkState.UNAVAILABLE
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.BehaviorSubject
 import org.junit.Test
 
 class SystemNetworkMonitorTest {
@@ -14,7 +14,7 @@ class SystemNetworkMonitorTest {
     private val connectivityManagerMock = mock<ConnectivityManager>()
     private val networkRequest = mock<NetworkRequest>()
 
-    private val state = PublishSubject.create<NetworkState>()
+    private val state = BehaviorSubject.create<NetworkState>()
     private val tested = SystemNetworkMonitor(
         state = state,
         connectivityManager = connectivityManagerMock,

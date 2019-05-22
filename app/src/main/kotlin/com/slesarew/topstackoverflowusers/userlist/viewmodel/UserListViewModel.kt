@@ -4,14 +4,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.slesarew.topstackoverflowusers.userlist.model.users.TopUsersUseCase
-import com.slesarew.topstackoverflowusers.userlist.model.users.UserProvider
+import com.slesarew.topstackoverflowusers.userlist.model.users.UsersProvider
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UsersState
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.state.ViewState
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.state.ViewStateReducer
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.state.viewStateReducer
 
 class UserListViewModel(
-    private val userProvider: UserProvider,
+    private val usersProvider: UsersProvider,
     private val stateReducer: ViewStateReducer = viewStateReducer
 ) : ViewModel() {
 
@@ -21,19 +21,19 @@ class UserListViewModel(
         viewState.applyChanges(stateReducer(viewState, it))
     }
 
-    fun load() = userProvider.getUsersState.observeForever(observer)
+    fun load() = usersProvider.usersState.observeForever(observer)
 
     override fun onCleared() {
-        userProvider.getUsersState.removeObserver(observer)
-        userProvider.dispose()
+        usersProvider.usersState.removeObserver(observer)
+        usersProvider.dispose()
 
         super.onCleared()
     }
 
     companion object {
 
-        fun create(userProvider: UserProvider): UserListViewModel =
-            UserListViewModel(userProvider).also(UserListViewModel::load)
+        fun create(usersProvider: UsersProvider): UserListViewModel =
+            UserListViewModel(usersProvider).also(UserListViewModel::load)
     }
 }
 

@@ -39,7 +39,7 @@ class TopUsersUseCaseTest {
         )
         val observer = mock<Observer<UsersState>>()
 
-        tested.getUsersState.observeForever(observer)
+        tested.usersState.observeForever(observer)
 
         verify(observer).onChanged(NoConnection)
     }
@@ -60,7 +60,7 @@ class TopUsersUseCaseTest {
         )
         val observer = mock<Observer<UsersState>>()
 
-        tested.getUsersState.observeForever(observer)
+        tested.usersState.observeForever(observer)
 
         verify(observer).onChanged(
             Data(
@@ -94,7 +94,7 @@ class TopUsersUseCaseTest {
         )
         val observer = mock<Observer<UsersState>>()
 
-        tested.getUsersState.observeForever(observer)
+        tested.usersState.observeForever(observer)
 
         verify(observer).onChanged(
             Data(
@@ -122,7 +122,7 @@ class TopUsersUseCaseTest {
         )
         val observer = mock<Observer<UsersState>>()
 
-        tested.getUsersState.observeForever(observer)
+        tested.usersState.observeForever(observer)
 
         verify(observer).onChanged(ServerError)
     }

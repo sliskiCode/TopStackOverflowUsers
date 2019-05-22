@@ -17,17 +17,18 @@ import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UsersState.NoC
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UsersState.ServerError
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
 
 class TopUsersUseCase(
     userRepository: UserRepository = StackOverflowApi(),
     limitOfUsers: Int = 20,
     private val networkMonitor: NetworkMonitor = SystemNetworkMonitor(),
     private val userPreferences: UserPreferences = SharedUserPreferences()
-) : UserProvider {
+) : UsersProvider {
 
     private val state = MutableLiveData<UsersState>()
 
-    private var disposable: Disposable? = null
+    private var disposable: Disposable = Disposables.disposed()
 
     private val usersStream by lazy {
         userRepository
@@ -43,39 +44,33 @@ class TopUsersUseCase(
                         reputation = user.reputation,
                         location = user.location,
                         creationDate = user.creationDate,
-                        isFollowed = isFollowed(followedIds, user)
+                        isFollowed = user.isFollowed(followedIds)
                     )
                 }) as UsersState
             }
-            .toObservable()
             .onErrorReturnItem(ServerError)
     }
 
-    private fun isFollowed(
-        followedIds: List<Pair<Long, Boolean>>,
-        user: User
-    ) = followedIds
-        .find { it.first == user.id }
-        ?.second
-        ?: false
+    private fun User.isFollowed(
+        followedIds: List<Pair<Long, Boolean>>
+    ) = followedIds.contains(id to true)
 
-    override val getUsersState: LiveData<UsersState>
+    override val usersState: LiveData<UsersState>
         get() {
-            if (disposable == null) {
-                disposable = networkMonitor.networkState
-                    .switchMap { networkState ->
-                        when (networkState) {
-                            AVAILABLE -> usersStream
-                            UNAVAILABLE -> Observable.just(NoConnection)
-                        }
+            disposable = networkMonitor
+                .networkState
+                .switchMap { networkState ->
+                    when (networkState) {
+                        AVAILABLE -> usersStream.toObservable()
+                        UNAVAILABLE -> Observable.just(NoConnection)
                     }
-                    .subscribe(state::postValue)
-            }
+                }
+                .subscribe(state::postValue)
 
             return state
         }
 
     override fun dispose() {
-        disposable?.dispose()
+        disposable.dispose()
     }
 }

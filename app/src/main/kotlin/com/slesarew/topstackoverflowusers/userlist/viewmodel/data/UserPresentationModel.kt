@@ -11,5 +11,5 @@ data class UserPresentationModel(
     val reputation: String = "",
     val location: String? = "",
     val creationDate: Long = 0L,
-    var isFollowed: Boolean = false
+    val isFollowed: Boolean = false
 ) : Parcelable

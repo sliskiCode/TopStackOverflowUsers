@@ -12,7 +12,7 @@ import com.slesarew.topstackoverflowusers.extension.systemService
 import com.slesarew.topstackoverflowusers.userlist.model.connection.NetworkState.AVAILABLE
 import com.slesarew.topstackoverflowusers.userlist.model.connection.NetworkState.UNAVAILABLE
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.BehaviorSubject
 
 private val cellularWifiNetworkRequest = NetworkRequest.Builder()
     .addTransportType(TRANSPORT_CELLULAR)
@@ -20,7 +20,7 @@ private val cellularWifiNetworkRequest = NetworkRequest.Builder()
     .build()
 
 class SystemNetworkMonitor(
-    private val state: PublishSubject<NetworkState> = PublishSubject.create(),
+    private val state: BehaviorSubject<NetworkState> = BehaviorSubject.create(),
     private val connectivityManager: ConnectivityManager = App.baseContext.systemService(Context.CONNECTIVITY_SERVICE),
     private val networkRequest: NetworkRequest = cellularWifiNetworkRequest
 ) : NetworkCallback(), NetworkMonitor {
