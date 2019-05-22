@@ -28,7 +28,7 @@ Main business logic lives in the `Model` layer. `Model` is responsible for downl
 `Repository` is implemented on the top of Retrofit library that is configured to work with RxJava.
 
 ###### Reactive flow
-RxJava was used to combine two main stream that `Model` logic defines. Network state and data from the endpoint. The reason behind
+RxJava was used to combine two main streams that `Model` logic defines. Network state and data from the endpoint. The reason behind
 using RxJava here was not multithreading but working with multiple streams.
 
 ### View
