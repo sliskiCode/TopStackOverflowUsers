@@ -12,8 +12,8 @@ fun TextView.hasText(@StringRes resId: Int) {
     assertEquals(context.getString(resId), text)
 }
 
-fun TextView.hasText(text: String) {
-    assertEquals(text, text)
+fun TextView.hasText(text: String) {z
+    assertEquals(text, this.text)
 }
 
 fun View.isVisible() {

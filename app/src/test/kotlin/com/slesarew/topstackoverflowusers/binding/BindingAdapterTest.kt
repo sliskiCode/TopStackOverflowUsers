@@ -10,7 +10,6 @@ import androidx.test.runner.AndroidJUnit4
 import com.nhaarman.mockitokotlin2.mock
 import com.slesarew.topstackoverflowusers.R
 import com.slesarew.topstackoverflowusers.userlist.view.adapter.UserListAdapter
-import com.slesarew.topstackoverflowusers.userlist.view.router.UserDetailsRouter
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UserPresentationModel
 import org.junit.Test
 import org.junit.runner.RunWith
