@@ -15,7 +15,7 @@ import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UsersState
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UsersState.Data
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UsersState.NoConnection
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UsersState.ServerError
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 
@@ -59,10 +59,10 @@ class TopUsersUseCase(
         get() {
             disposable = networkMonitor
                 .networkState
-                .switchMap { networkState ->
+                .flatMapSingle { networkState ->
                     when (networkState) {
-                        AVAILABLE -> usersStream.toObservable()
-                        UNAVAILABLE -> Observable.just(NoConnection)
+                        AVAILABLE -> usersStream
+                        UNAVAILABLE -> Single.just(NoConnection)
                     }
                 }
                 .subscribe(state::postValue)
