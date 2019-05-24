@@ -35,12 +35,11 @@ class UserListAdapterTest {
 
     @Test
     fun `notifies about data set changed`() {
-        val oldValue = tested.users
-        val newValue = listOf(UserPresentationModel())
+        val users = listOf(UserPresentationModel())
 
-        tested.users = newValue
+        tested.users = users
 
-        verify(dataSetChangedNotifierMock).invoke(oldValue, newValue, tested)
+        verify(dataSetChangedNotifierMock).invoke(tested)
     }
 
     @Test

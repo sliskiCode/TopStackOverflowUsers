@@ -29,7 +29,9 @@ class UserListActivity : AppCompatActivity() {
                     this@UserListActivity,
                     userList.userDetailContainer != null
                 )
-            )
+            ).apply {
+                setHasStableIds(true)
+            }
         }
 
         setSupportActionBar(toolbar)

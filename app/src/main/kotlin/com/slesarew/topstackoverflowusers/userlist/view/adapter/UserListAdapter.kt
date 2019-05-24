@@ -7,14 +7,18 @@ import com.slesarew.topstackoverflowusers.databinding.UserItemBinding
 import com.slesarew.topstackoverflowusers.userlist.view.router.UserDetailsRouter
 import com.slesarew.topstackoverflowusers.userlist.viewmodel.data.UserPresentationModel
 
+typealias DataSetChangedNotifier = (RecyclerView.Adapter<ViewHolder>) -> Unit
+
 class UserListAdapter(
     private val router: UserDetailsRouter,
-    private val dataSetChangedNotifier: DataSetChangedNotifier = diffUtilNotifier
+    private val dataSetChangedNotifier: DataSetChangedNotifier = RecyclerView.Adapter<ViewHolder>::notifyDataSetChanged
 ) : RecyclerView.Adapter<ViewHolder>() {
 
     var users: List<UserPresentationModel> = emptyList()
-        set(value) = dataSetChangedNotifier(field, value, this).also {
+        set(value) {
             field = value
+
+            dataSetChangedNotifier(this)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -30,6 +34,8 @@ class UserListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(users[position])
 
     override fun getItemCount(): Int = users.size
+
+    override fun getItemId(position: Int): Long = users[position].id
 }
 
 open class ViewHolder(
