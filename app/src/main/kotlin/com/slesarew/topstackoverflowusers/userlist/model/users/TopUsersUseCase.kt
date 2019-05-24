@@ -57,15 +57,17 @@ class TopUsersUseCase(
 
     override val usersState: LiveData<UsersState>
         get() {
-            disposable = networkMonitor
-                .networkState
-                .flatMapSingle { networkState ->
-                    when (networkState) {
-                        AVAILABLE -> usersStream
-                        UNAVAILABLE -> Single.just(NoConnection)
+            if (disposable.isDisposed) {
+                disposable = networkMonitor
+                    .networkState
+                    .flatMapSingle { networkState ->
+                        when (networkState) {
+                            AVAILABLE -> usersStream
+                            UNAVAILABLE -> Single.just(NoConnection)
+                        }
                     }
-                }
-                .subscribe(state::postValue)
+                    .subscribe(state::postValue)
+            }
 
             return state
         }
